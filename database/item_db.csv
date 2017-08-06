@@ -1,5 +1,5 @@
-ItemID,Make,Model,Year,Type,Color,Condition,Price
-01,Toyota,Corolla,2012,Sedan,Grey,Like-new,18000
-02,Toyota,Camry,2006,Sedan,Red,Used,15000
-03,Dodge,Grand Caravan,2010,Van,Blue,New,24000
-04,Dodge,Charger,2015,Sport,Black,Like-new,35000
+ItemID,Make,Model,Year,Type,Color,Condition,Price,IMG_URL
+01,Toyota,Corolla,2012,Sedan,Grey,Like-new,18000,https://media.ed.edmunds-media.com/toyota/corolla/2012/oem/2012_toyota_corolla_sedan_s_fq_oem_1_500.jpg
+02,Toyota,Camry,2006,Sedan,Red,Used,15000,https://media.ed.edmunds-media.com/toyota/camry/2006/oem/2006_toyota_camry_sedan_se-v6_fq_oem_2_500.jpg
+03,Dodge,Grand Caravan,2010,Van,Blue,New,24000,https://media.ed.edmunds-media.com/dodge/grand-caravan/2010/oem/2010_dodge_grand-caravan_cargo-minivan_cv_fq_oem_2_500.jpg
+04,Dodge,Charger,2015,Sport,Black,Like-new,35000,https://www.cstatic-images.com/phototab/4/f/5/84/6ee078c73f838a481cde0ba445a.jpg
