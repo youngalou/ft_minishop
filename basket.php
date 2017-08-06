@@ -6,13 +6,6 @@
 			."<a href='login.html'>Login Here</a>"
 			."<h3> Your cart is empty<h3>";
 		$total = 0;
-
-		if ($_POST['order1'] == 'Order')
-		{
-			echo "Ordered<br>";
-			$order1 = array("anonuser", 02, "Charger", 17000, 1);
-			array_push($_SESSION['basket'], $order1);
-		}
 		if ($_SESSION['basket'])
 		{
 			echo "Something is in your cart!<br>";
@@ -31,13 +24,13 @@
 	else
 	{
 		$welcome = "<h1>Welcome "
-		.ucfirst($_SESSION['logged_on_user'])
-		.", here's what is in your basket"
-		."</h1><br>";
+			.ucfirst($_SESSION['logged_on_user'])
+			.", here's what is in your basket"
+			."</h1><br>";
 		$basket_db = fopen("database/basket.csv", 'a+');
 		$total = 0;
 		// $basket_collection = array();
-		$basket_collection = $_SESSION['basket'];
+		// $basket_collection = $_SESSION['basket'];
 		// while (($basket = fgetcsv($basket_db)) !== FALSE)
 		// {
 		// 	if ($basket[0] == $_SESSION['logged_on_user'])
@@ -103,7 +96,7 @@
 		{
 			$itemId = array();
 			$itemQuant = array();
-			foreach ($basket_collection as $key => $basket_item) {
+			foreach ($_SESSION['basket'] as $key => $basket_item) {
 				foreach ($basket_item as $key => $value) {
 					if ($key == 2 || $key == 3 || $key == 4)
 					{
@@ -113,12 +106,12 @@
 						
 				}
 				echo "<form action='rm_item.php' method='post'>
-										ItemID: <input type='text' name='itemID'><br />
-										<input type='submit' name='submit' value='Remove Item'>
-									</form>	";
+						ItemID: <input type='text' name='itemID'><br />
+						<input type='submit' name='submit' value='Remove Item'>
+					</form>	";
 				echo "<br>";
 			}
-			$basket_collection[0][2];
+			$_SESSION['basket'][0][2];
 		}
 		?>
 	<h3>Your total comes out to: $<?=$total?></h3>

@@ -77,7 +77,7 @@ else if ($_POST['submit'] === "Check User")
 			<div class="row">
 				<div class="jumbotron col-12">
 					<img src="img/cars.jpg">
-					<form action="basket.php" method="post">
+					<form action="addToBasket.php" method="post">
 						<input type="submit" name="order1" value="Order">
 					</form>
 				</div>

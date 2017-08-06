@@ -23,18 +23,18 @@ if ($_POST['submit'] === "Log-in")
 	$access = authenticate($_POST['login'], $_POST['passwd']);
 	if ($access)
 	{
-        $basket_db = fopen("database/basket.csv", 'a+');
+        $_SESSION['logged_on_user'] = $_POST['login'];
+        $basket_db = fopen("database/basket.csv", 'r');
         while (($basket = fgetcsv($basket_db)) !== FALSE)
         {
+            // echo $basket[0];
             if ($basket[0] == $_SESSION['logged_on_user'])
             {
-                // array_push($basket_collection, $basket);
                 if (!$_SESSION['basket'])
                     $_SESSION['basket'] = array();
                 array_push($_SESSION['basket'], $basket);
             }
         }
-		$_SESSION['logged_on_user'] = $_POST['login'];
 		if ($access === 2)
 			$_SESSION['admin'] = "admin";
 		header('Location: homepage.php');
