@@ -1,0 +1,30 @@
+<html>
+	<title>Add Item</title>
+	<head>
+		<style>
+			.form
+			{
+				background-color: #909090;
+				border: solid 2px black;
+				border-radius: 5px;
+				width: 300px;
+				height: 150px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class='form'>
+			<form action="add_item.php" method="post">
+				ItemID: <input type='text' name='itemID'><br />
+				Make: <input type='text' name='make'><br />
+				Model: <input type='text' name='model'><br />
+				Year: <input type='text' name='year'><br />
+				Style: <input type='text' name='style'><br />
+				Color: <input type='text' name='color'><br />
+				Condition: <input type='text' name='condition'><br />
+				Price: <input type='text' name='price'><br />
+				<input type='submit' name='submit' value='Add Item'>
+			</form>
+		</div>
+	</body>
+</html>
