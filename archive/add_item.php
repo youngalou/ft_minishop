@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if ($_POST['submit'] === 'Add Item' && $_SESSION['logged_on_user'] === 'admin')
+if ($_POST['submit'] === 'Add Item' && $_SESSION['logged_on_user'])
 {
 	$tab[0] = $_POST['itemID'];
 	$tab[1] = $_POST['make'];
