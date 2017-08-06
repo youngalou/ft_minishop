@@ -1,55 +1,6 @@
 <?php
+
 session_start();
-?>
-
-<html>
-	<title>Admin</title>
-	<head>
-		<style>
-			.form
-			{
-				background-color: #909090;
-				border: solid 2px black;
-				border-radius: 5px;
-				width: 300px;
-				height: 175px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class='form'>
-			<form action="admin.php" method="post">
-				ItemID: <input type='text' name='itemID'><br />
-				Make: <input type='text' name='make'><br />
-				Model: <input type='text' name='model'><br />
-				Year: <input type='text' name='year'><br />
-				Style: <input type='text' name='style'><br />
-				Color: <input type='text' name='color'><br />
-				Condition: <input type='text' name='condition'><br />
-				Price: <input type='text' name='price'><br />
-				<input type='submit' name='submit' value='Add Item'>
-			</form>
-		</div>
-		<div class='form'>
-			<form action="admin.php" method="post">
-				ItemID: <input type='text' name='itemID'><br />
-				<input type='submit' name='submit' value='Remove Item'>
-			</form>
-		</div>
-		<div class='form'>
-			<form action="admin.php" method="post">
-				Username: <input type='text' name='login'><br />
-				<input type='submit' name='submit' value='Remove User'>
-			</form>
-		</div>
-		<div class='form'>
-			<form action="admin.php" method="post">
-				Username: <input type='text' name='login'><br />
-				<input type='submit' name='submit' value='Add Admin'>
-			</form>
-		</div>
-<?php
-
 if ($_POST['submit'] === 'Add Item')
 {
     $tab[0] = $_POST['itemID'];
@@ -107,9 +58,54 @@ else if ($_POST['submit'] === 'Add Admin' && file_exists("database/users"))
 	file_put_contents("database/users", $serial);
 	echo $_POST['login']." is now an administrator!\n";
 }
-else
-    echo "ERROR\n";
 
 ?>
+
+<html>
+	<title>Admin</title>
+	<head>
+		<style>
+			.form
+			{
+				background-color: #909090;
+				border: solid 2px black;
+				border-radius: 5px;
+				width: 300px;
+				height: 175px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class='form'>
+			<form action="admin.php" method="post">
+				ItemID: <input type='text' name='itemID'><br />
+				Make: <input type='text' name='make'><br />
+				Model: <input type='text' name='model'><br />
+				Year: <input type='text' name='year'><br />
+				Style: <input type='text' name='style'><br />
+				Color: <input type='text' name='color'><br />
+				Condition: <input type='text' name='condition'><br />
+				Price: <input type='text' name='price'><br />
+				<input type='submit' name='submit' value='Add Item'>
+			</form>
+		</div>
+		<div class='form'>
+			<form action="admin.php" method="post">
+				ItemID: <input type='text' name='itemID'><br />
+				<input type='submit' name='submit' value='Remove Item'>
+			</form>
+		</div>
+		<div class='form'>
+			<form action="admin.php" method="post">
+				Username: <input type='text' name='login'><br />
+				<input type='submit' name='submit' value='Remove User'>
+			</form>
+		</div>
+		<div class='form'>
+			<form action="admin.php" method="post">
+				Username: <input type='text' name='login'><br />
+				<input type='submit' name='submit' value='Add Admin'>
+			</form>
+		</div>
 	</body>
 </html>

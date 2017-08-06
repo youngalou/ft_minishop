@@ -47,9 +47,8 @@
 		// 	}
 		// }
 		// rewind($basket_db);
-		foreach ($basket_collection as $key => $basket_item) {
-			$total += $key[3] * $key[4];
-		}
+		foreach ($_SESSION['basket'] as $key => $basket_item)
+			$total += $basket_item[3] * $basket_item[4];
 		if ($_POST['submit'] == "Confirm Order")
 		{
 			$orders_db = fopen("database/orders.csv", 'a+');
