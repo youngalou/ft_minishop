@@ -6,6 +6,7 @@ if ($_SESSION['logged_on_user'] === NULL)
 else
 {
 	$_SESSION['logged_on_user'] = NULL;
+	$_SESSION['admin'] = NULL;
 	echo "Logout successful!";
 }
 
