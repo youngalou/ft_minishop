@@ -29,6 +29,8 @@ if ($_POST['submit'] === "Log-in")
             if ($basket[0] == $_SESSION['logged_on_user'])
             {
                 // array_push($basket_collection, $basket);
+                if (!$_SESSION['basket'])
+                    $_SESSION['basket'] = array();
                 array_push($_SESSION['basket'], $basket);
             }
         }
