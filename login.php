@@ -33,6 +33,16 @@ if ($access)
 		}
 		else
 			echo "Welcome, you are logged in!\n";
+        $basket_db = fopen("database/basket.csv", 'a+');
+        $basket_collection = array();
+        while (($basket = fgetcsv($basket_db)) !== FALSE)
+        {
+            if ($basket[0] == $_SESSION['logged_on_user'])
+            {
+                array_push($basket_collection, $basket);
+            }
+        }
+        $_SESSION['basket'] = $basket_collection;
 	}
 }
 else
