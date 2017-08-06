@@ -11,6 +11,7 @@ if ($_POST['submit'] === 'Add Item')
     $tab[5] = $_POST['color'];
     $tab[6] = $_POST['condition'];
     $tab[7] = $_POST['price'];
+    $tab[8] = $_POST['img_url'];
     if (!file_exists("database/item_db.csv"))
         mkdir("database", 0777);
     $item_db = fopen("database/item_db.csv", 'a+');
@@ -86,6 +87,7 @@ else if ($_POST['submit'] === 'Add Admin' && file_exists("database/users"))
 				Color: <input type='text' name='color'><br />
 				Condition: <input type='text' name='condition'><br />
 				Price: <input type='text' name='price'><br />
+				IMG URL: <input type='text' name='img_url'><br />
 				<input type='submit' name='submit' value='Add Item'>
 			</form>
 		</div>

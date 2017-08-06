@@ -1,6 +1,42 @@
 <?php
 
 session_start();
+$item_db = fopen("database/item_db.csv", r);
+$arr = array();
+$i = 0;
+while ($item = fgetcsv($item_db))
+{
+	if ($item[4] === $_POST['submit'])
+	{
+		$arr[$i] = $item;
+		$i++;
+	}
+}
+$count = $i;
+$i = 0;
+while ($i < $count)
+{
+	$desc = $arr[$i][3]." ".$arr[$i][1]." ".$arr[$i][2]." ".$arr[$i][5]." for: $".$arr[$i][7];
+	$img = $arr[$i][8];
+	$html[$i] = "<div class='row'><div class='jumbotron col-12'><p>$desc</p><img src='$img'><form action='basket.php' method='post'><input type='submit' name='order1' value='Order'></form></div></div>";
+	$i++;
+}
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+
 if ($_POST['submit'] === "Log-out")
 {
 	if ($_SESSION['logged_on_user'] === NULL)
@@ -26,6 +62,15 @@ else if ($_POST['submit'] === "Check User")
 
 ?>
 
+
+
+
+
+
+
+
+
+
 <html>
 	<title>ft_minishop</title>
 	<head>
@@ -46,57 +91,13 @@ else if ($_POST['submit'] === "Check User")
 						</ul>
 					</div>
 				</div>
-			</div>
-			<div class="logo">
-				<h1>Scooter's Catch-A-Ride</h1>
-			</div>
-			<div class="navBar">
-				<ul>
-					<div class="col-2">
-						<li><form action="sort_by_type.php" method="post"><input type='submit' name='submit' value='Sedan'></form></li>
-					</div>
-					<div class="col-2">
-						<li>Mini Van</li>
-					</div>
-					<div class="col-2">
-						<li>SUV</li>
-					</div>
-					<div class="col-2">
-						<li>Hatchback</li>
-					</div>
-					<div class="col-2">
-						<li>Truck</li>
-					</div>
-					<div class="col-2">
-						<li>Motorcycle</li>
-					</div>
-				</ul>
-			</div>
 		</div>
 		<div class="content">
 			<div class="row">
-				<div class="jumbotron col-12">
-					<img src="img/cars.jpg">
-					<form action="addToBasket.php" method="post">
-						<input type="submit" name="order1" value="Order">
-					</form>
-				</div>
-			</div>
-			<!-- </div> -->
-			<div class="row">
-				<div class="jumbotron col-12">
-					<img src="img/chev.jpg">
-				</div>
-			</div>
-			<div class="row">
-				<div class="moreInfo col-6">
-					<img src="img/sale.jpg">
-				</div>
-				<div class="moreInfo col-6">
-					<img src="img/sale.jpg">
-				</div>
-			</div>
-		</div>
+			<?php
+			foreach ($html as $val)
+				echo $val;
+			?>
 		<div class="footer col-12">
 			<div class="bottomNav">
 				<div class="col-4">
