@@ -1,0 +1,53 @@
+@import "master.css";
+
+.header {
+	padding-bottom: 0px;
+}
+.topNav	{
+	text-align: right;
+	height: 60px;
+}
+.topNav .row .col-12 {
+	height: 60px;
+}
+.topNav ul {
+	list-style-type: none;
+	/*display: inline-block;*/
+}
+.topNav li {
+	display: inline;
+}
+
+.logo {
+	text-align: center;
+	height: 80px;
+}
+.navBar {
+	text-align: center;
+	height: 80px;
+	padding-bottom: 0px;
+}
+.navBar	ul {
+	list-style-type: none;
+}
+.navbar li {
+	display: inline;
+	height: 80px;
+}
+.content {
+	max-width: 1380px;
+	text-align: center;
+	margin: auto;
+}
+.jumbotron {
+	text-align: center;	
+}
+.jumbotron img {
+	height: 700px;
+}
+.moreInfo {
+	text-align: center;
+}
+.moreInfo img {
+	height: 660px;
+}
