@@ -1,7 +1,13 @@
 @import "master.css";
 
+body {
+	background: #78909c;
+}
+
 .header {
 	padding-bottom: 0px;
+	background: #4b636e;
+	color: white;
 }
 .topNav	{
 	text-align: right;
@@ -29,10 +35,14 @@
 }
 .navBar	ul {
 	list-style-type: none;
+	padding: 0;
+	margin: 0;
 }
-.navbar li {
+.navBar li {
 	display: inline;
 	height: 80px;
+	width: 100%;
+	background: #a7c0cd;
 }
 .content {
 	max-width: 1380px;
@@ -50,4 +60,7 @@
 }
 .moreInfo img {
 	height: 660px;
+}
+.footer {
+	background: #4b636e;
 }
