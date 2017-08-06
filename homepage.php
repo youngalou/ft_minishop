@@ -1,3 +1,31 @@
+<?php
+
+session_start();
+if ($_POST['submit'] === "Log-out")
+{
+	if ($_SESSION['logged_on_user'] === NULL)
+		echo "Error:\nNot logged in!";
+	else
+	{
+		$_SESSION['logged_on_user'] = NULL;
+		$_SESSION['admin'] = NULL;
+		echo "Logout successful!";
+	}
+}
+else if ($_POST['submit'] === "Check User")
+{
+	if ($_SESSION['logged_on_user'])
+	{
+		echo "Logged in as: ".$_SESSION['logged_on_user']."\n";
+		if ($_SESSION['admin'] === "admin")
+			echo "You are an administrator!\n";
+	}
+	else
+		echo "Not logged in.";
+}
+
+?>
+
 <html>
 	<title>ft_minishop</title>
 	<head>
@@ -12,9 +40,9 @@
 						<ul>
 							<li><a href="basket.php"><b>Basket</b></a></li>
 							<li><a href="login.php"><b>Log-in</b></a></li>
-							<li><a href="logout.php"><b>Log-out</b></a></li>
 							<li><a href="admin.php"><b>Admin</b></a></li>
-							<li><a href="whoami.php"><b>Check login</b></a></li>
+							<form action="homepage.php" method="post"><input type='submit' name='submit' value='Log-out'></form>
+							<form action="homepage.php" method="post"><input type='submit' name='submit' value='Check User'></form>
 						</ul>
 					</div>
 				</div>
