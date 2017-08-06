@@ -6,9 +6,16 @@
 			."<a href='login.html'>Login Here</a>"
 			."<h3> Your cart is empty<h3>";
 		$total = 0;
+
+		if ($_POST['order1'] == 'Order')
+		{
+			echo "Ordered<br>";
+			$order1 = array("anonuser", 02, "Charger", 17000, 1);
+			array_push($_SESSION['basket'], $order1);
+		}
 		if ($_SESSION['basket'])
 		{
-			echo "Something is in your cart!";
+			echo "Something is in your cart!<br>";
 			foreach ($_SESSION['basket'] as $key => $basket_item) {
 				foreach ($basket_item as $key => $value) {
 					if ($key == 2 || $key == 3 || $key == 4)
@@ -17,6 +24,7 @@
 						
 					}
 				}
+				echo "<br>";
 			}
 		}
 	}
@@ -28,16 +36,20 @@
 		."</h1><br>";
 		$basket_db = fopen("database/basket.csv", 'a+');
 		$total = 0;
-		$basket_collection = array();
-		while (($basket = fgetcsv($basket_db)) !== FALSE)
-		{
-			if ($basket[0] == $_SESSION['logged_on_user'])
-			{
-				array_push($basket_collection, $basket);
-				$total += $basket[3] * $basket[4];
-			}
+		// $basket_collection = array();
+		$basket_collection = $_SESSION['basket'];
+		// while (($basket = fgetcsv($basket_db)) !== FALSE)
+		// {
+		// 	if ($basket[0] == $_SESSION['logged_on_user'])
+		// 	{
+		// 		array_push($basket_collection, $basket);
+		// 		$total += $basket[3] * $basket[4];
+		// 	}
+		// }
+		// rewind($basket_db);
+		foreach ($basket_collection as $key => $basket_item) {
+			$total += $key[3] * $key[4];
 		}
-		rewind($basket_db);
 		if ($_POST['submit'] == "Confirm Order")
 		{
 			$orders_db = fopen("database/orders.csv", 'a+');

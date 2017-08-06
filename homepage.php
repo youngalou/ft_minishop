@@ -1,3 +1,8 @@
+<?php
+	if ($_POST['order1'] == 'Order')
+		echo "It worked";
+?>
+
 <html>
 	<title>ft_minishop</title>
 	<head>
@@ -49,9 +54,7 @@
 			<div class="row">
 				<div class="jumbotron col-12">
 					<img src="img/cars.jpg">
-					<form action="basket.php" method="post">
-						<input type="submit" name="order1" value="Order">
-					</form>
+					<input type="submit" name="order1" value="Order">
 				</div>
 			</div>
 			<!-- </div> -->
