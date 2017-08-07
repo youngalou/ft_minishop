@@ -7,8 +7,8 @@
 	}
 	else
 	{
-		$topNav	= "<form action='homepage.php' method='post'><input type='submit' name='submit' value='Log-out'></form>"
-			."<li><a href='modify.php'><b>Change Password</b></a></li>";
+		$topNav	= "<li><form action='homepage.php' method='post'><input type='submit' name='submit' value='Log-out'></form></li>"
+			."<li><a href='modify.php'>Change Password</a></li>";
 		if ($_SESSION['admin'] === "admin")
 			$topNav .= "<li><a href='admin.php'><b>Admin</b></a></li>";
 	}
@@ -19,30 +19,37 @@
 		else
 		{
 			$basket_db = fopen("database/basket.csv", 'a+');
+			rewind($basket_db);
+			while (($basket = fgetcsv($basket_db)) !== FALSE)
+			{
+				if ($basket[5] > $entry)
+					$entry = $basket[5];
+			}
+			$entry += 1;
 			foreach ($_SESSION['basket'] as $key => $basket_item) {
 				rewind($basket_db);
 				$match = FALSE;
-				echo "USER "
-					.$basket_item[0]
-					."<br>";
-				$entry = 005;
+				// echo "USER "
+				// 	.$basket_item[0]
+				// 	."<br>";
+				
 				$basket_item[0] = $_SESSION['logged_on_user'];
 				while (($basket = fgetcsv($basket_db)) !== FALSE)
 				{
-					echo "CSV UID "
-						.$basket[0]
-						."<br>";
+					// echo "CSV UID "
+					// 	.$basket[0]
+					// 	."<br>";
 					if ($basket[0] == $_SESSION['logged_on_user'])
 					{
-						echo "DID "
-							.$basket[1]
-							."SID "
-							.$basket_item[1]
-							.
-							"<br>";
+						// echo "DID "
+						// 	.$basket[1]
+						// 	."SID "
+						// 	.$basket_item[1]
+						// 	.
+						// 	"<br>";
 						if ($basket[1] == $basket_item[1])
 						{
-							echo "Matched<br>";
+							// echo "Matched<br>";
 							if (($basket[5] == $basket_item[5] && $basket[4] != $basket_item[4]) || ($basket[5] != $basket_item[5]))
 							{
 								$basket_item[4] += $basket[4];
@@ -50,16 +57,21 @@
 							$contents = file_get_contents("database/basket.csv");
 							$contents = str_replace(implode(",", $basket)."\n", NULL, $contents);
 							file_put_contents("database/basket.csv", $contents);
-							array_push($basket_item, $entry);
+							if (!$basket_item[5])
+								array_push($basket_item, $entry);
 							fputcsv($basket_db, ($basket_item));
 							$match = TRUE;
-							$entry++;
+							$entry += 001;
 							break;
 						}
 					}
 				}
 				if ($match === FALSE)
+				{
+					if (!$basket_item[5])
+						array_push($basket_item, $entry);
 					fputcsv($basket_db, $basket_item);
+				}
 			}
 			$_SESSION['basket'] = array();
 			$_SESSION['logged_on_user'] = NULL;
