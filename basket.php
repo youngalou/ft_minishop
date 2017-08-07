@@ -55,7 +55,7 @@
 			.ucfirst($_SESSION['logged_on_user'])
 			.", here's what is in your basket"
 			."</h1><br>";
-		$basket_db = fopen("database/basket.csv", 'r');
+		// $basket_db = fopen("database/basket.csv", 'r');
 		$total = 0;
 		foreach ($_SESSION['basket'] as $key => $basket_item)
 			$total += $basket_item[3] * $basket_item[4];
@@ -77,15 +77,26 @@
 						$maxOrder = $orders[1];
 				}
 				rewind($orders_db);
-				while (($basket = fgetcsv($basket_db)) !== FALSE)
-				{
-
-					if ($basket[0] == $_SESSION['logged_on_user'])
+				foreach ($_SESSION['basket'] as $key => $basket_item) {
+					if ($basket_item[4] > 0)
 					{
-						array_splice($basket, 1, 0, $maxOrder + 1);
-						fputcsv($orders_db, $basket);
+						$basketInput = $basket_item;
+						$basketInput[0] = $_SESSION['logged_on_user'];
+						if (!$basketInput[5])
+							$basketInput[5] = 0;
+						array_splice($basketInput, 1, 0, $maxOrder + 1);
+						fputcsv($orders_db, $basketInput);
 					}
 				}
+				// while (($basket = fgetcsv($basket_db)) !== FALSE)
+				// {
+
+				// 	if ($basket[0] == $_SESSION['logged_on_user'])
+				// 	{
+				// 		array_splice($basket, 1, 0, $maxOrder + 1);
+				// 		fputcsv($orders_db, $basket);
+				// 	}
+				// }
 			}
 		}
 	}
