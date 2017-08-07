@@ -87,9 +87,10 @@
 							echo $value."\t";
 					}
 					echo "<form action='removeFromBasket.php' method='post'>
-							<input type='submit' name='".(string)$basket_item[1]."' value='Remove Item'>
-						</form>	";
-					echo "<br>";				
+							<input type='submit' name='"
+							.(string)$basket_item[1]
+							."' value='Remove Item'></form>	"
+							."<br>";
 				}
 				
 			}

@@ -8,7 +8,8 @@
 	}
 	else
 	{
-		$topNav	= "<form action='homepage.php' method='post'><input type='submit' name='submit' value='Log-out'></form>";
+		$topNav	= "<form action='homepage.php' method='post'><input type='submit' name='submit' value='Log-out'></form>"
+			."<li><a href='modify.php'><b>Change Password</b></a></li>";
 		if ($_SESSION['admin'] === "admin")
 			$topNav .= "<li><a href='admin.php'><b>Admin</b></a></li>";
 	}
@@ -58,9 +59,6 @@
 					<div class="col-12">
 						<ul>
 							<li><a href="basket.php"><b>Basket</b></a></li>
-							<!-- <li><a href="login.php"><b>Log-in</b></a></li>
-							<li><a href="admin.php"><b>Admin</b></a></li>
-							<form action="homepage.php" method="post"><input type='submit' name='submit' value='Log-out'></form> -->
 							<?=$topNav?>
 							<form action="homepage.php" method="post"><input type='submit' name='submit' value='Check User'></form>
 						</ul>
@@ -76,19 +74,41 @@
 						<li><form action="sort_by_type.php" method="post"><input type='submit' name='submit' value='Sedan'></form></li>
 					</div>
 					<div class="col-2">
-						<li>Mini Van</li>
+						<li><form action="sort_by_type.php" method="post"><input type='submit' name='submit' value='Minivan'></form></li>
 					</div>
 					<div class="col-2">
-						<li>SUV</li>
+						<li><form action="sort_by_type.php" method="post"><input type='submit' name='submit' value='SUV'></form></li>
 					</div>
 					<div class="col-2">
-						<li>Hatchback</li>
+						<li><form action="sort_by_type.php" method="post"><input type='submit' name='submit' value='Sport'></form></li>
 					</div>
 					<div class="col-2">
 						<li>Truck</li>
 					</div>
 					<div class="col-2">
 						<li>Motorcycle</li>
+					</div>
+				</ul>
+			</div>
+			<div class="navBar">
+				<ul>
+					<div class="col-2">
+						<li><form action="sort_by_color.php" method="post"><input type='submit' name='submit' value='Black'></form></li>
+					</div>
+					<div class="col-2">
+						<li><form action="sort_by_color.php" method="post"><input type='submit' name='submit' value='White'></form></li>
+					</div>
+					<div class="col-2">
+						<li><form action="sort_by_color.php" method="post"><input type='submit' name='submit' value='Grey'></form></li>
+					</div>
+					<div class="col-2">
+						<li><form action="sort_by_color.php" method="post"><input type='submit' name='submit' value='Red'></form></li>
+					</div>
+					<div class="col-2">
+						<li><form action="sort_by_color.php" method="post"><input type='submit' name='submit' value='Blue'></form></li>
+					</div>
+					<div class="col-2">
+						<li><form action="sort_by_color.php" method="post"><input type='submit' name='submit' value='Silver'></form></li>
 					</div>
 				</ul>
 			</div>

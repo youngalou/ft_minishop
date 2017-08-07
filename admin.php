@@ -25,7 +25,7 @@ else if ($_POST['submit'] === 'Remove Item' && file_exists("database/item_db.csv
     {
         if ($arr[0] === $_POST['itemID'])
         {
-            $line = $arr[0].','.$arr[1].','.$arr[2].",".$arr[3].",".$arr[4].",".$arr[5].",".$arr[6].",".$arr[7]."\n";
+            $line = $arr[0].','.$arr[1].','.$arr[2].",".$arr[3].",".$arr[4].",".$arr[5].",".$arr[6].",".$arr[7].",".$arr[8]."\n";
             $contents = file_get_contents("database/item_db.csv");
             $contents = str_replace($line, NULL, $contents);
             file_put_contents("database/item_db.csv", $contents);
@@ -72,7 +72,7 @@ else if ($_POST['submit'] === 'Add Admin' && file_exists("database/users"))
 				border: solid 2px black;
 				border-radius: 5px;
 				width: 300px;
-				height: 175px;
+				height: 200px;
 			}
 		</style>
 	</head>
