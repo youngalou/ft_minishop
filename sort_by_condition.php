@@ -64,6 +64,7 @@ else if ($_POST['submit'] === "Check User")
 				<div class="row">
 					<div class="col-12">
 						<ul>
+							<li><a href="homepage.php"><b>Homepage</b></a></li>
 							<li><a href="basket.php"><b>Basket</b></a></li>
 							<li><a href="login.php"><b>Log-in</b></a></li>
 							<li><a href="admin.php"><b>Admin</b></a></li>
