@@ -1,13 +1,15 @@
 <?php
 
 session_start();
-$type = $_POST['submit'];
+if ($_POST['submit'] != NULL)
+	$_SESSION['type'] = $_POST['submit'];
+$type = $_SESSION['type'];
 $item_db = fopen("database/item_db.csv", r);
 $arr = array();
 $i = 0;
 while ($item = fgetcsv($item_db))
 {
-	if ($item[4] === $_POST['submit'])
+	if ($item[4] === $_SESSION['type'])
 	{
 		$arr[$i] = $item;
 		$i++;
@@ -19,7 +21,8 @@ while ($i < $count)
 {
 	$desc = $arr[$i][6]." ".$arr[$i][3]." ".$arr[$i][1]." ".$arr[$i][2]." ".$arr[$i][5]." for: $".$arr[$i][7];
 	$img = $arr[$i][8];
-	$html[$i] = "<div class='row'><div class='jumbotron col-12'><p>$desc</p><img src='$img'><form action='basket.php' method='post'><input type='submit' name='order1' value='Order'></form></div></div>";
+	$itemID = $arr[$i][0];
+	$html[$i] = "<div class='row'><div class='jumbotron col-12'><p>$desc</p><img src='$img'><form action='addToBasket.php' method='post'><input type='submit' name=$itemID value='Order'></form></div></div>";
 	$i++;
 }
 
@@ -77,8 +80,8 @@ else if ($_POST['submit'] === "Check User")
 		<div class="content">
 			<div class="row">
 			<?php
-			foreach ($html as $val)
-				echo $val;
+				foreach ($html as $val)
+					echo $val;
 			?>
 		<div class="footer col-12">
 			<div class="bottomNav">
