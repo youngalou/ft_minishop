@@ -1,10 +1,10 @@
 <?php
-
-session_start();
-if ($_POST['submit'] === "Log-out")
-{
+	session_start();
 	if ($_SESSION['logged_on_user'] === NULL)
-		echo "Error:\nNot logged in!";
+	{
+		$topNav = "<li><a href='login.php'><b>Log-in</b></a></li>"
+			."<li><a href='register.php'><b>Sign-Up!</b></a></li>";
+	}
 	else
 	{
 		$topNav	= "<form action='homepage.php' method='post'><input type='submit' name='submit' value='Log-out'></form>"
@@ -66,19 +66,19 @@ if ($_POST['submit'] === "Log-out")
 			echo "<script type='text/javascript'>alert('$logout');</script>";
 		}
 	}
-}
-else if ($_POST['submit'] === "Check User")
-{
-	if ($_SESSION['logged_on_user'])
+	else if ($_POST['submit'] === "Check User")
 	{
-		echo "Logged in as: ".$_SESSION['logged_on_user']."\n";
-		if ($_SESSION['admin'] === "admin")
-			echo "You are an administrator!\n";
+		if ($_SESSION['logged_on_user'])
+		{
+			echo "Logged in as: ".$_SESSION['logged_on_user']."\n";
+			if ($_SESSION['admin'] === "admin")
+				echo "You are an administrator!\n";
+		}
+		else
+			echo "Not logged in.";
 	}
-	else
-		echo "Not logged in.";
-}
-
+	$item_db = fopen("database/item_db.csv", 'r');
+	$item = fgetcsv($item_db);
 ?>
 
 <html>
@@ -94,10 +94,7 @@ else if ($_POST['submit'] === "Check User")
 					<div class="col-12">
 						<ul>
 							<li><a href="basket.php"><b>Basket</b></a></li>
-							<li><a href="login.php"><b>Log-in</b></a></li>
-							<li><a href="change_pw.php"><b>Change Password</b></a></li>
-							<li><a href="admin.php"><b>Admin</b></a></li>
-							<form action="homepage.php" method="post"><input type='submit' name='submit' value='Log-out'></form>
+							<?=$topNav?>
 							<form action="homepage.php" method="post"><input type='submit' name='submit' value='Check User'></form>
 						</ul>
 					</div>
@@ -171,8 +168,12 @@ else if ($_POST['submit'] === "Check User")
 			<div class="row">
 				<div class="jumbotron col-12">
 					<img src="img/cars.jpg">
+					<?php
+						$item = fgetcsv($item_db);
+						echo $item[0];
+					?>
 					<form action="addToBasket.php" method="post">
-						<input type="submit" name="order1" value="Order">
+						<input type="submit" name="<?=$item[0]?>" value="Order">
 					</form>
 				</div>
 			</div>
