@@ -32,7 +32,6 @@
 				// echo "USER "
 				// 	.$basket_item[0]
 				// 	."<br>";
-				
 				$basket_item[0] = $_SESSION['logged_on_user'];
 				while (($basket = fgetcsv($basket_db)) !== FALSE)
 				{
@@ -55,13 +54,15 @@
 								$basket_item[4] += $basket[4];
 							}
 							$contents = file_get_contents("database/basket.csv");
+							// print_r($basket);
+							// echo "Contents"
+							// 	.$contents;
 							$contents = str_replace(implode(",", $basket)."\n", NULL, $contents);
 							file_put_contents("database/basket.csv", $contents);
 							if (!$basket_item[5])
 								array_push($basket_item, $entry);
 							fputcsv($basket_db, ($basket_item));
 							$match = TRUE;
-							$entry += 001;
 							break;
 						}
 					}
@@ -179,54 +180,6 @@
 				</ul>
 			</div>	
 		</div>
-		<div class="content">
-			<div class="row">
-				<div class="jumbotron col-12">
-					<img src="img/cars.jpg">
-					<?php
-						$item = fgetcsv($item_db);
-						echo $item[0];
-					?>
-					<form action="addToBasket.php" method="post">
-						<input type="submit" name="<?=$item[0]?>" value="Order">
-					</form>
-				</div>
-			</div>
-			<!-- </div> -->
-			<div class="row">
-				<div class="jumbotron col-12">
-					<img src="img/chev.jpg">
-				</div>
-			</div>
-			<div class="row">
-				<div class="moreInfo col-6">
-					<img src="img/sale.jpg">
-				</div>
-				<div class="moreInfo col-6">
-					<img src="img/sale.jpg">
-				</div>
-			</div>
-		</div>
-		<div class="footer col-12">
-			<div class="bottomNav">
-				<div class="col-4">
-					Next Door
-				</div>
-				<div class="col-8">
-					<div class="col-4">
-						Test
-					</div>
-					<div class="col-4">
-						Test
-					</div>
-					<div class="col-4">
-						Test
-					</div>
-				</div>
-			</div>
-		</div>
-		<div>
-		</div>
-<br />
+		<center><img src="https://static.giantbomb.com/uploads/original/12/129913/2335126-2012_09_18_00012.jpg"></center>
 	</body>
 </html>
