@@ -20,7 +20,7 @@
 			}
 			if ($match === FALSE)
 				array_push($_SESSION['basket'], $order);
-			header('Location: homepage.php');
+			header('Location: '.$_SERVER['HTTP_REFERER']);
 		}
 	}
 	
