@@ -95,6 +95,11 @@
 	}
 	$item_db = fopen("database/item_db.csv", 'r');
 	$item = fgetcsv($item_db);
+	$item = fgetcsv($item_db);
+	$desc = $item[6]." ".$item[3]." ".$item[1]." ".$item[2]." ".$item[5]." for: $".$item[7];
+	$img = $item[8];
+	$itemID = $item[0];
+	$html = "<div class='row'><div class='jumbotron col-12'><h3 class='jumbotron'>Featured Car</h3><p>$desc</p><img src='$img'><form action='addToBasket.php' method='post'><input type='submit' name=$itemID value=    'Order'></form></div></div>";
 ?>
 
 <html>
@@ -181,5 +186,6 @@
 			</div>	
 		</div>
 		<center><img src="https://static.giantbomb.com/uploads/original/12/129913/2335126-2012_09_18_00012.jpg"></center>
+		<?php echo $html;?>
 	</body>
 </html>
