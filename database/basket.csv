@@ -1,4 +1,2 @@
-UserID,ItemID,Model,Price,Quantity
-aegistov,01,Corolla,18000,1
-aegistov,02,Charger,17000,2
-aegistov,03,Spectra,13000,1
+UserID,ItemID,Model,Price,Quantity,EntryID
+lyoung,01,Corolla,18000,2,004

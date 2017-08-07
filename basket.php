@@ -115,10 +115,6 @@
 <body>
 	<?=$welcome?>
 	<?php 
-		// if ($_SESSION['logged_on_user'])
-		// {
-			$itemId = array();
-			$itemQuant = array();
 			foreach ($_SESSION['basket'] as $key => $basket_item) {
 				if ($basket_item[4] > 0)
 				{
@@ -135,7 +131,6 @@
 				
 			}
 			$_SESSION['basket'][0][2];
-		// }
 		?>
 	<h3>Your total comes out to: $<?=$total?></h3>
 	<form action="basket.php" method="post">

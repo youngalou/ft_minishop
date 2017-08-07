@@ -25,6 +25,7 @@
 				echo "USER "
 					.$basket_item[0]
 					."<br>";
+				$entry = 005;
 				$basket_item[0] = $_SESSION['logged_on_user'];
 				while (($basket = fgetcsv($basket_db)) !== FALSE)
 				{
@@ -42,15 +43,17 @@
 						if ($basket[1] == $basket_item[1])
 						{
 							echo "Matched<br>";
-							$basket_item[4] += $basket[4];
+							if (($basket[5] == $basket_item[5] && $basket[4] != $basket_item[4]) || ($basket[5] != $basket_item[5]))
+							{
+								$basket_item[4] += $basket[4];
+							}
 							$contents = file_get_contents("database/basket.csv");
-							// print_r($basket);
-							// echo "Contents"
-							// 	.$contents;
 							$contents = str_replace(implode(",", $basket)."\n", NULL, $contents);
 							file_put_contents("database/basket.csv", $contents);
-							fputcsv($basket_db, $basket_item);
+							array_push($basket_item, $entry);
+							fputcsv($basket_db, ($basket_item));
 							$match = TRUE;
+							$entry++;
 							break;
 						}
 					}
