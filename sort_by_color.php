@@ -83,26 +83,7 @@ else if ($_POST['submit'] === "Check User")
 			foreach ($html as $val)
 				echo $val;
 			?>
-		<div class="footer col-12">
-			<div class="bottomNav">
-				<div class="col-4">
-					Next Door
-				</div>
-				<div class="col-8">
-					<div class="col-4">
-						Test
-					</div>
-					<div class="col-4">
-						Test
-					</div>
-					<div class="col-4">
-						Test
-					</div>
-				</div>
 			</div>
 		</div>
-		<div>
-		</div>
-<br />
 	</body>
 </html>
