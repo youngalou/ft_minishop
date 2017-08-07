@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+$type = $_POST['submit'];
 $item_db = fopen("database/item_db.csv", r);
 $arr = array();
 $i = 0;
@@ -16,24 +17,13 @@ $count = $i;
 $i = 0;
 while ($i < $count)
 {
-	$desc = $arr[$i][3]." ".$arr[$i][1]." ".$arr[$i][2]." ".$arr[$i][5]." for: $".$arr[$i][7];
+	$desc = $arr[$i][6]." ".$arr[$i][3]." ".$arr[$i][1]." ".$arr[$i][2]." ".$arr[$i][5]." for: $".$arr[$i][7];
 	$img = $arr[$i][8];
 	$html[$i] = "<div class='row'><div class='jumbotron col-12'><p>$desc</p><img src='$img'><form action='basket.php' method='post'><input type='submit' name='order1' value='Order'></form></div></div>";
 	$i++;
 }
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
 
 <?php
 
@@ -62,17 +52,8 @@ else if ($_POST['submit'] === "Check User")
 
 ?>
 
-
-
-
-
-
-
-
-
-
 <html>
-	<title>ft_minishop</title>
+<title>ft_minishop <?=$type?>s</title>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="css/homepage.css">
@@ -80,6 +61,7 @@ else if ($_POST['submit'] === "Check User")
 	<body>
 		<div class="header col-12">
 			<div class="topNav">
+			<h1><center><?=$type?>s</center></h1>
 				<div class="row">
 					<div class="col-12">
 						<ul>

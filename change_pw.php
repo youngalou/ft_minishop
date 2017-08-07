@@ -38,7 +38,7 @@ if ($_POST['submit'] === 'Change Password' && $_POST['login'] && $_POST['oldpw']
 	</head>
 	<body>
 		<div class='form'>
-			<form action="modify.php" method="post">
+			<form action="change_pw.php" method="post">
 				<h3>Change Password</h3>
 				Username: <input type='text' name='login'><br />
 				Old Password: <input type='password' name='oldpw'><br />
