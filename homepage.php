@@ -1,29 +1,48 @@
 <?php
 
-session_start();
-if ($_POST['submit'] === "Log-out")
-{
+	session_start();
 	if ($_SESSION['logged_on_user'] === NULL)
-		echo "Error:\nNot logged in!";
+	{
+		$topNav = "<li><a href='login.php'><b>Log-in</b></a></li>"
+			."<li><a href='register.php'><b>Sign-Up!</b></a></li>";
+	}
 	else
 	{
-		$_SESSION['logged_on_user'] = NULL;
-		$_SESSION['admin'] = NULL;
-		echo "Logout successful!";
-	}
-}
-else if ($_POST['submit'] === "Check User")
-{
-	if ($_SESSION['logged_on_user'])
-	{
-		echo "Logged in as: ".$_SESSION['logged_on_user']."\n";
+		$topNav	= "<form action='homepage.php' method='post'><input type='submit' name='submit' value='Log-out'></form>";
 		if ($_SESSION['admin'] === "admin")
-			echo "You are an administrator!\n";
+			$topNav .= "<li><a href='admin.php'><b>Admin</b></a></li>";
 	}
-	else
-		echo "Not logged in.";
-}
-
+	if ($_POST['submit'] === "Log-out")
+	{
+		if ($_SESSION['logged_on_user'] === NULL)
+			echo "Error:\nNot logged in!";
+		else
+		{
+			$basket_db = fopen("database/basket.csv", 'a+');
+			foreach ($_SESSION['basket'] as $key => $basket_item) {
+				$basket_item[0] = $_SESSION['logged_on_user'];
+				fputcsv($basket_db, $basket_item);
+			}
+			$_SESSION['basket'] = array();
+			$_SESSION['logged_on_user'] = NULL;
+			$_SESSION['admin'] = NULL;
+			$logout = "Logout successful!";
+			echo "<script type='text/javascript'>alert('$logout');</script>";
+		}
+	}
+	else if ($_POST['submit'] === "Check User")
+	{
+		if ($_SESSION['logged_on_user'])
+		{
+			echo "Logged in as: ".$_SESSION['logged_on_user']."\n";
+			if ($_SESSION['admin'] === "admin")
+				echo "You are an administrator!\n";
+		}
+		else
+			echo "Not logged in.";
+	}
+	$item_db = fopen("database/item_db.csv", 'r');
+	$item = fgetcsv($item_db);
 ?>
 
 <html>
@@ -39,9 +58,10 @@ else if ($_POST['submit'] === "Check User")
 					<div class="col-12">
 						<ul>
 							<li><a href="basket.php"><b>Basket</b></a></li>
-							<li><a href="login.php"><b>Log-in</b></a></li>
+							<!-- <li><a href="login.php"><b>Log-in</b></a></li>
 							<li><a href="admin.php"><b>Admin</b></a></li>
-							<form action="homepage.php" method="post"><input type='submit' name='submit' value='Log-out'></form>
+							<form action="homepage.php" method="post"><input type='submit' name='submit' value='Log-out'></form> -->
+							<?=$topNav?>
 							<form action="homepage.php" method="post"><input type='submit' name='submit' value='Check User'></form>
 						</ul>
 					</div>
@@ -77,8 +97,12 @@ else if ($_POST['submit'] === "Check User")
 			<div class="row">
 				<div class="jumbotron col-12">
 					<img src="img/cars.jpg">
+					<?php
+						$item = fgetcsv($item_db);
+						echo $item[0];
+					?>
 					<form action="addToBasket.php" method="post">
-						<input type="submit" name="order1" value="Order">
+						<input type="submit" name="<?=$item[0]?>" value="Order">
 					</form>
 				</div>
 			</div>

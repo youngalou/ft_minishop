@@ -3,7 +3,7 @@
 	if (!$_SESSION['logged_on_user'])
 	{
 		$welcome = "<h1>Login to view your basket!</h1>"
-			."<a href='login.html'>Login Here</a>"
+			."<a href='login.php'>Login Here</a>"
 			."<h3> Your cart is empty<h3>";
 		$total = 0;
 		if ($_SESSION['basket'])
@@ -12,10 +12,7 @@
 			foreach ($_SESSION['basket'] as $key => $basket_item) {
 				foreach ($basket_item as $key => $value) {
 					if ($key == 2 || $key == 3 || $key == 4)
-					{
 						echo $value."\t";
-						
-					}
 				}
 				echo "<br>";
 			}
@@ -27,19 +24,8 @@
 			.ucfirst($_SESSION['logged_on_user'])
 			.", here's what is in your basket"
 			."</h1><br>";
-		$basket_db = fopen("database/basket.csv", 'a+');
+		$basket_db = fopen("database/basket.csv", 'r');
 		$total = 0;
-		// $basket_collection = array();
-		// $basket_collection = $_SESSION['basket'];
-		// while (($basket = fgetcsv($basket_db)) !== FALSE)
-		// {
-		// 	if ($basket[0] == $_SESSION['logged_on_user'])
-		// 	{
-		// 		array_push($basket_collection, $basket);
-		// 		$total += $basket[3] * $basket[4];
-		// 	}
-		// }
-		// rewind($basket_db);
 		foreach ($_SESSION['basket'] as $key => $basket_item)
 			$total += $basket_item[3] * $basket_item[4];
 		if ($_POST['submit'] == "Confirm Order")
@@ -80,9 +66,6 @@
 			}
 		}
 	}
-	else
-		echo "ERROR\n";
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -97,19 +80,18 @@
 			$itemId = array();
 			$itemQuant = array();
 			foreach ($_SESSION['basket'] as $key => $basket_item) {
-				foreach ($basket_item as $key => $value) {
-					if ($key == 2 || $key == 3 || $key == 4)
-					{
-						echo $value."\t";
-						
+				if ($basket_item[4] > 0)
+				{
+					foreach ($basket_item as $key => $value) {
+						if ($key == 2 || $key == 3 || $key == 4)
+							echo $value."\t";
 					}
-						
+					echo "<form action='removeFromBasket.php' method='post'>
+							<input type='submit' name='".(string)$basket_item[1]."' value='Remove Item'>
+						</form>	";
+					echo "<br>";				
 				}
-				echo "<form action='rm_item.php' method='post'>
-						ItemID: <input type='text' name='itemID'><br />
-						<input type='submit' name='submit' value='Remove Item'>
-					</form>	";
-				echo "<br>";
+				
 			}
 			$_SESSION['basket'][0][2];
 		}
