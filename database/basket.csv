@@ -2,11 +2,4 @@ UserID,ItemID,Model,Price,Quantity
 aegistov,01,Corolla,18000,1
 aegistov,02,Charger,17000,2
 aegistov,03,Spectra,13000,1
-lyoung,04,Lambo,98000,1aegistov,01,Malibu,12000,9
-aegistov,02,Charger,17000,2
-aegistov,03,Spectra,13000,1
-aegistov,01,Corolla,18000,1
-aegistov,02,Charger,17000,0
-aegistov,03,Spectra,13000,0
-aegistov,02,Charger,17000,0
-aegistov,03,Spectra,13000,0
+lyoung,04,Lambo,98000,1

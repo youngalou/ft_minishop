@@ -21,13 +21,49 @@
 		{
 			$basket_db = fopen("database/basket.csv", 'a+');
 			foreach ($_SESSION['basket'] as $key => $basket_item) {
+				rewind($basket_db);
+				$match = FALSE;
+				echo "USER "
+					.$basket_item[0]
+					."<br>";
 				$basket_item[0] = $_SESSION['logged_on_user'];
-				fputcsv($basket_db, $basket_item);
+				while (($basket = fgetcsv($basket_db)) !== FALSE)
+				{
+					echo "CSV UID "
+						.$basket[0]
+						."<br>";
+					if ($basket[0] == $_SESSION['logged_on_user'])
+					{
+						echo "DID "
+							.$basket[1]
+							."SID "
+							.$basket_item[1]
+							.
+							"<br>";
+						if ($basket[1] == $basket_item[1])
+						{
+							echo "Matched<br>";
+							$basket_item[4] += $basket[4];
+							$contents = file_get_contents("database/basket.csv");
+							// print_r($basket);
+							// echo "Contents"
+							// 	.$contents;
+							$contents = str_replace(implode(",", $basket)."\n", NULL, $contents);
+							file_put_contents("database/basket.csv", $contents);
+							fputcsv($basket_db, $basket_item);
+							$match = TRUE;
+							break;
+						}
+					}
+				}
+				if ($match === FALSE)
+					fputcsv($basket_db, $basket_item);
 			}
 			$_SESSION['basket'] = array();
 			$_SESSION['logged_on_user'] = NULL;
 			$_SESSION['admin'] = NULL;
 			$logout = "Logout successful!";
+			header("Refresh:0");
 			echo "<script type='text/javascript'>alert('$logout');</script>";
 		}
 	}

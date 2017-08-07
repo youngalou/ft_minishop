@@ -25,14 +25,25 @@ if ($_POST['submit'] === "Log-in")
 	{
         $_SESSION['logged_on_user'] = $_POST['login'];
         $basket_db = fopen("database/basket.csv", 'r');
+        if (!$_SESSION['basket'])
+            $_SESSION['basket'] = array();
         while (($basket = fgetcsv($basket_db)) !== FALSE)
         {
-            // echo $basket[0];
+            $match = FALSE;
             if ($basket[0] == $_SESSION['logged_on_user'])
             {
                 if (!$_SESSION['basket'])
                     $_SESSION['basket'] = array();
-                array_push($_SESSION['basket'], $basket);
+                foreach ($_SESSION['basket'] as $key => $basket_item) {
+                    if ($basket_item[1] == $basket[1])
+                    {
+                        $_SESSION['basket'][$key][4] += $basket[4];
+                        $match = TRUE;
+                        break;
+                    }
+                }
+                if ($match === FALSE)
+                        array_push($_SESSION['basket'], $basket);
             }
         }
 		if ($access === 2)
